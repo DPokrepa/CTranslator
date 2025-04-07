@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Java в Lua переводчик</title>
+</head>
+<body>
+    <h1>Переводчик Java → Lua</h1>
+    
+    <textarea id="java" placeholder="Вставь Java код..." rows="10" cols="60"></textarea><br>
+    <button onclick="перевести()">Перевести</button><br><br>
+    <textarea id="lua" placeholder="Здесь будет Lua код..." rows="10" cols="60" readonly></textarea>
+
+    <script>
+        function перевести() {
+            let java = document.getElementById("java").value;
+            let lua = java;
+
+            // Простейшие переводы
+            lua = lua.replace(/System\.out\.println/g, "print");
+            lua = lua.replace(/int /g, "");
+            lua = lua.replace(/boolean /g, "");
+            lua = lua.replace(/true/g, "true");
+            lua = lua.replace(/false/g, "false");
+            lua = lua.replace(/for \(int i = 0; i < 10; i\+\+\)/g, "for i = 0, 9 do");
+            lua = lua.replace(/{/g, "");
+            lua = lua.replace(/}/g, "end");
+
+            document.getElementById("lua").value = lua;
+        }
+    </script>
+</body>
+</html>
